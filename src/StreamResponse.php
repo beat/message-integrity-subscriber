@@ -31,7 +31,7 @@ class StreamResponse implements SubscriberInterface
     public function getEvents()
     {
         // Fire this event near the end of the event chain.
-        return ['headers' => ['onHeaders', RequestEvents::LATE]];
+        return array('headers' => array('onHeaders', RequestEvents::LATE));
     }
 
     public function onHeaders(HeadersEvent $event)

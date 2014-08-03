@@ -19,7 +19,7 @@ class PhpHash implements HashInterface
      *     - key: Secret key used with the hashing algorithm.
      *     - base64: Set to true to base64 encode the value when complete.
      */
-    public function __construct($algo, array $options = [])
+    public function __construct($algo, array $options = array())
     {
         $this->algo = $algo;
         $this->options = $options;

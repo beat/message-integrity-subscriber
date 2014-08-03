@@ -39,7 +39,7 @@ class CompleteResponse implements SubscriberInterface
     public function getEvents()
     {
         // Fire at the same level of normal response verification.
-        return ['complete' => ['onComplete', RequestEvents::VERIFY_RESPONSE]];
+        return array('complete' => array('onComplete', RequestEvents::VERIFY_RESPONSE));
     }
 
     public function onComplete(CompleteEvent $event)

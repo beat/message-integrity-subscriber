@@ -14,7 +14,7 @@ class ResponseIntegrity implements SubscriberInterface
 {
     private $full;
     private $streaming;
-    private $appliedRequests = [];
+    private $appliedRequests = array();
 
     /**
      * Creates a new plugin that validates the Content-MD5 of responses
@@ -23,12 +23,12 @@ class ResponseIntegrity implements SubscriberInterface
      */
     public static function createForContentMd5()
     {
-        return new self([
-            'hash' => new PhpHash('md5', ['base64' => true]),
+        return new self(array(
+            'hash' => new PhpHash('md5', array('base64' => true)),
             'expected' => function (ResponseInterface $response) {
                 return $response->getHeader('Content-MD5');
             }
-        ]);
+		));
     }
 
     /**
@@ -76,7 +76,7 @@ class ResponseIntegrity implements SubscriberInterface
 
     public function getEvents()
     {
-        return ['before' => ['onBefore']];
+        return array('before' => array('onBefore'));
     }
 
     public function onBefore(BeforeEvent $event)
@@ -92,7 +92,10 @@ class ResponseIntegrity implements SubscriberInterface
         }
 
         $this->appliedRequests[$hash] = true;
-        if ($event->getRequest()->getConfig()['stream']) {
+
+		$requestConfig = $event->getRequest()->getConfig();
+
+        if ($requestConfig['stream']) {
             $request->getEmitter()->attach($this->streaming);
         } else {
             $request->getEmitter()->attach($this->full);
