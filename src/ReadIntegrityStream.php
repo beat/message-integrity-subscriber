@@ -3,7 +3,6 @@
 namespace GuzzleHttp\Subscriber\MessageIntegrity;
 
 use GuzzleHttp\Stream\MetadataStreamInterface;
-use GuzzleHttp\Stream\StreamDecoratorTrait;
 use GuzzleHttp\Stream\StreamInterface;
 
 /**
@@ -153,7 +152,7 @@ class ReadIntegrityStream implements StreamInterface
         StreamInterface $stream,
         HashInterface $hash,
         $expected,
-        callable $onFail = null
+        $onFail = null
     ) {
         $this->stream = $stream;
         $this->hash = $hash;
