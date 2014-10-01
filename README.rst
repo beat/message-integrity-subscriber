@@ -27,7 +27,7 @@ composer.json:
 
     {
         "require": {
-            "guzzlehttp/message-integrity-subscriber": "0.1.0"
+            "guzzlehttp/message-integrity-subscriber": "0.2.*"
         }
     }
 
@@ -71,7 +71,7 @@ Handling Errors
 ---------------
 
 If the calculated hash of the response body does not match the extracted
-responses header, then a ``GuzzleHttp\Subscriber\MessageIntegrity\MessageIntegrityException``
+response's header, then a ``GuzzleHttp\Subscriber\MessageIntegrity\MessageIntegrityException``
 is thrown. This exception extends from ``GuzzleHttp\Exception\RequestException``
 so it contains a request accessed via ``getRequest()`` and a response via
 ``getResponse()``.

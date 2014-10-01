@@ -1,10 +1,9 @@
 <?php
-
 namespace GuzzleHttp\Subscriber\MessageIntegrity;
 
+use GuzzleHttp\Event\CompleteEvent;
 use GuzzleHttp\Event\RequestEvents;
 use GuzzleHttp\Event\SubscriberInterface;
-use GuzzleHttp\Event\HeadersEvent;
 use GuzzleHttp\Message\ResponseInterface;
 
 /**
@@ -31,10 +30,10 @@ class StreamResponse implements SubscriberInterface
     public function getEvents()
     {
         // Fire this event near the end of the event chain.
-        return array('headers' => array('onHeaders', RequestEvents::LATE));
+        return array('headers' => array('onComplete', RequestEvents::LATE));
     }
 
-    public function onHeaders(HeadersEvent $event)
+    public function onComplete(CompleteEvent $event)
     {
         $response = $event->getResponse();
         if (!($expected = $this->getExpected($response))) {

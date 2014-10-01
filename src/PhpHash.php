@@ -1,5 +1,4 @@
 <?php
-
 namespace GuzzleHttp\Subscriber\MessageIntegrity;
 
 /**
@@ -28,7 +27,7 @@ class PhpHash implements HashInterface
     public function update($data)
     {
         if ($this->hash !== null) {
-            $this->context = $this->hash = null;
+            $this->reset();
         }
 
         hash_update($this->getContext(), $data);
@@ -47,6 +46,11 @@ class PhpHash implements HashInterface
         }
 
         return $this->hash;
+    }
+
+    public function reset()
+    {
+        $this->context = $this->hash = null;
     }
 
     /**
