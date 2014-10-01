@@ -32,9 +32,12 @@ class ReadIntegrityStream extends HashingStream
     ) {
         $this->mismatchCallback = $onMismatch;
         $this->expected = $expected;
-        parent::__construct($stream, $hash, function ($result) {
-            if ($this->expected !== $result) {
-                $this->mismatch($result);
+
+		$that = $this;
+
+        parent::__construct($stream, $hash, function ($result) use ($that) {
+            if ($that->expected !== $result) {
+                $that->mismatch($result);
             }
         });
     }
